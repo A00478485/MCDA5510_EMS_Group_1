@@ -22,20 +22,30 @@ namespace EMS_App.Controllers
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
-              return _context.Ticket != null ? 
-                          View(await _context.Ticket.ToListAsync()) :
-                          Problem("Entity set 'EMSContext.Ticket'  is null.");
-        }
-
-        private bool TicketExists(int id)
-        {
-          return (_context.Ticket?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.Ticket != null ?
+                        View(await _context.Ticket.ToListAsync()) :
+                        Problem("Entity set 'EMSContext.Ticket'  is null.");
         }
 
         // GET: /Tickets/Checkout/ 
         [HttpPost]
-        public ActionResult Checkout(ICollection<Ticket> model)
+        public ActionResult ProceedtoCheckout(ICollection<Ticket> model)
         {
+            CheckoutView checkoutView = new CheckoutView();
+            checkoutView.Ticket = model.ToList();
+            return View("Checkout", checkoutView);
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(CheckoutView model)
+        {
+            //if (ModelState.IsValid)
+            {
+                model.purchase.Created = DateTime.Now;
+                model.purchase.BCity = "Halifax";
+                _context.Purchase.Add(model.purchase);
+                _context.SaveChanges();
+            }
             return View(model);
         }
     }

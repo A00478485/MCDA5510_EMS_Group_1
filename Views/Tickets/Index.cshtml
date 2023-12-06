@@ -40,8 +40,6 @@
     }
 </script>
 
-<h1>Index</h1>
-
 <div class="container">
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Ticket Details</h1>
@@ -49,7 +47,7 @@
     <div class="row align-items-md-stretch">
         <div class="col-md-6">
             <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-                @using (Html.BeginForm("Checkout", "Tickets", FormMethod.Post, new { onsubmit = "validateForm(event)" }))
+                @using (Html.BeginForm("ProceedtoCheckout", "Tickets", FormMethod.Post, new { onsubmit = "validateForm(event)" }))
                 {                
                 @for (var j=0;j<Model.Count;j++)
                 {

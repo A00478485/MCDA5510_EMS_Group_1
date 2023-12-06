@@ -1,58 +1,71 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model List<EMS_App.Models.Ticket>
+@model CheckoutView
 @{
     ViewData["Title"] = "Checkout";
 }
 <script language="javascript" type="text/javascript">
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
+    function updateCity(valueSelected) {
+        console.log(valueSelected);
+        $("#city option").remove();
+        if (valueSelected == "AB") {
+            $("#city").append("<option>Banff</option><option>Brooks</option><option>Calgary</option><option>Edmonton</option><option>FortMcMurray</option><option>GrandePrairie</option><option>Jasper</option><option>LakeLouise</option><option>Lethbridge</option><option>MedicineHat</option><option>RedDeer</option><option>SaintAlbert</option>");
+        } else if (valueSelected == "BC") {
+            $("#city").append("<option>Barkerville</option><option>Burnaby</option><option>Campbell River</option><option>Chilliwack</option><option>Courtenay</option><option>Cranbrook</option><option>Dawson Creek</option><option>Delta</option><option>Esquimalt</option><option>Fort Saint James</option><option>Fort Saint John</option><option>Hope</option><option>Kamloops</option><option>Kelowna</option><option>Kimberley</option><option>Kitimat</option><option>Langley</option><option>Nanaimo</option><option>Nelson</option><option>New Westminster</option><option>North Vancouver</option><option>Oak Bay</option><option>Penticton</option><option>Powell River</option><option>Prince George</option><option>Prince Rupert</option><option>Quesnel</option><option>Revelstoke</option><option>Rossland</option><option>Trail</option><option>Vancouver</option><option>Vernon</option><option>Victoria</option><option>West Vancouver</option><option>White Rock</option>");
+        } else if (valueSelected == "MB") {
+            $("#city").append("<option>Brandon</option><option>Churchill</option><option>Dauphin</option><option>Flin Flon</option><option>Kildonan</option><option>Saint Boniface</option><option>Swan River</option><option>Thompson</option><option>Winnipeg</option><option>York Factory</option>");
+        } else if (valueSelected == "NB") {
+            $("#city").append("<option>Bathurst</option><option>Caraquet</option><option>Dalhousie</option><option>Fredericton</option><option>Miramichi</option><option>Moncton</option><option>Saint John</option>");
+        } else if (valueSelected == "NL") {
+            $("#city").append("<option>Argentia</option><option>Bonavista</option><option>Channel-Port aux Basques</option><option>Corner Brook</option><option>Ferryland</option><option>Gander</option><option>Grand Falls–Windsor</option><option>Happy Valley–Goose Bay</option><option>Harbour Grace</option><option>Labrador City</option><option>Placentia</option><option>Saint Anthony</option><option>St. John’s</option><option>Wabana</option>");
+        } else if (valueSelected == "NT") {
+            $("#city").append("<option>Fort Smith</option><option>Hay River</option><option>Inuvik</option><option>Tuktoyaktuk</option><option>Yellowknife</option>");
+        } else if (valueSelected == "NS") {
+            $("#city").append("<option>Baddeck</option><option>Digby</option><option>Glace Bay</option><option>Halifax</option><option>Liverpool</option><option>Louisbourg</option><option>Lunenburg</option><option>Pictou</option><option>Port Hawkesbury</option><option>Springhill</option><option>Sydney</option><option>Yarmouth</option>");
+        } else if (valueSelected == "NU") {
+            $("#city").append("<option>Iqaluit</option>");
+        } else if (valueSelected == "ON") {
+            $("#city").append("<option>Bancroft</option><option>Barrie</option><option>Belleville</option><option>Brampton</option><option>Brantford</option><option>Brockville</option><option>Burlington</option><option>Cambridge</option><option>Chatham</option><option>Chatham-Kent</option><option>Cornwall</option><option>Elliot Lake</option><option>Etobicoke</option><option>Fort Erie</option><option>Fort Frances</option><option>Gananoque</option><option>Guelph</option><option>Hamilton</option><option>Iroquois Falls</option><option>Kapuskasing</option><option>Kawartha Lakes</option><option>Kenora</option><option>Kingston</option><option>Kirkland Lake</option><option>Kitchener</option><option>Laurentian Hills</option><option>London</option><option>Midland</option><option>Mississauga</option><option>Moose Factory</option><option>Moosonee</option><option>Niagara Falls</option><option>Niagara-on-the-Lake</option><option>North Bay</option><option>North York</option><option>Oakville</option><option>Orillia</option><option>Oshawa</option><option>Ottawa</option><option>Parry Sound</option><option>Perth</option><option>Peterborough</option><option>Picton</option><option>Port Colborne</option><option>Saint Catharines</option><option>Saint Thomas</option><option>Sarnia-Clearwater</option><option>Sault Sainte Marie</option><option>Scarborough</option><option>Simcoe</option><option>Stratford</option><option>Sudbury</option><option>Temiskaming Shores</option><option>Thorold</option><option>Thunder Bay</option><option>Timmins</option><option>Toronto</option><option>Trenton</option><option>Waterloo</option><option>Welland</option><option>West Nipissing</option><option>Windsor</option><option>Woodstock</option><option>York</option>");
+        } else if (valueSelected == "PE") {
+            $("#city").append("<option>Borden</option><option>Cavendish</option><option>Charlottetown</option><option>Souris</option><option>Summerside</option>");
+        } else if (valueSelected == "QC") {
+            $("#city").append("<option>Asbestos</option><option>Baie-Comeau</option><option>Beloeil</option><option>Cap-de-la-Madeleine</option><option>Chambly</option><option>Charlesbourg</option><option>Châteauguay</option><option>Chibougamau</option><option>Côte-Saint-Luc</option><option>Dorval</option><option>Gaspé</option><option>Gatineau</option><option>Granby</option><option>Havre-Saint-Pierre</option><option>Hull</option><option>Jonquière</option><option>Kuujjuaq</option><option>La Salle</option><option>La Tuque</option><option>Lachine</option><option>Laval</option><option>Lévis</option><option>Longueuil</option><option>Magog</option><option>Matane</option><option>Montreal</option><option>Montréal-Nord</option><option>Percé</option><option>Port-Cartier</option><option>Quebec</option><option>Rimouski</option><option>Rouyn-Noranda</option><option>Saguenay</option><option>Saint-Eustache</option><option>Saint-Hubert</option><option>Sainte-Anne-de-Beaupré</option><option>Sainte-Foy</option><option>Sainte-Thérèse</option><option>Sept-Îles</option><option>Sherbrooke</option><option>Sorel-Tracy</option><option>Trois-Rivières</option><option>Val-d’Or</option><option>Waskaganish</option>");
+        } else if (valueSelected == "SK") {
+            $("#city").append("<option>Batoche</option><option>Cumberland House</option><option>Estevan</option><option>Flin Flon</option><option>Moose Jaw</option><option>Prince Albert</option><option>Regina</option><option>Saskatoon</option><option>Uranium City</option>");
+        } else if (valueSelected == "YT") {
+            $("#city").append("<option>Dawson</option><option>Watson Lake</option><option>Whitehorse</option>");
+        }
+    }
 </script>
 <div class="container">
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Checkout</h1>
     </div>
-    
+
     <div class="row g-5">
         <div class="col-md-5 col-lg-4 order-md-last">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span>Your cart</span>
             </h4>
             <ul class="list-group mb-3">
-                @{int price = 0;}
-                @for (var j = 0; j < Model.Count; j++)
+                @{
+                    int price = 0;
+                }
+                @for (var j = 0; j < Model.Ticket.Count; j++)
                 {
-                    if (Model[j].Quantity == 0)
+                    if (Model.Ticket[j].Quantity == 0)
                         continue;
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
-                            <h6 class="my-0">@Html.DisplayFor(modelItem => Model[j].Type)</h6>
-                            <small class="text-body-secondary">Quantity: @Html.DisplayFor(modelItem => Model[j].Quantity)</small>
+                            <h6 class="my-0">@Html.DisplayFor(modelItem => Model.Ticket[j].Type)</h6>
+                            <small class="text-body-secondary">Quantity: @Html.DisplayFor(modelItem => Model.Ticket[j].Quantity)</small>
                         </div>
-                        <span class="text-body-secondary">$@Html.DisplayFor(modelItem => Model[j].Price)</span>
+                        <span class="text-body-secondary">$@Html.DisplayFor(modelItem => Model.Ticket[j].Price)</span>
                     </li>
-                    price += Model[j].Price * Model[j].Quantity;
+                    price += Model.Ticket[j].Price * Model.Ticket[j].Quantity;
                 }
-                
+
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (CAD)</span>
                     <strong>$@String.Format("{0:0,0}",price) </strong>
@@ -61,20 +74,130 @@
         </div>
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Billing address</h4>
-            <form class="needs-validation" novalidate>
-                <div class="row g-3">
+            <form asp-controller="Tickets" asp-action="Checkout" method="post" class="mt-3">
+                <div class="form-group row g-3">
                     <div class="col-sm-6">
-                        <label for="firstName" class="form-label">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" required />
+                        <label asp-for="purchase.BFirstName" class="form-label">First name</label>
+                        <input asp-for="purchase.BFirstName" class="form-control" placeholder="" />
+                        <span asp-validation-for="purchase.BFirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label asp-for="purchase.BLastName" class="form-label">Last name</label>
+                        <input asp-for="purchase.BLastName" type="text" class="form-control" id="lastName" placeholder="" />
+                        <span asp-validation-for="purchase.BLastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="purchase.BAddress1" class="form-label">Address</label>
+                        <input asp-for="purchase.BAddress1" type="text" class="form-control" id="address" placeholder="1234 Main St" />
+                        <span asp-validation-for="purchase.BAddress1" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="purchase.BAddress2" class="form-label">Address 2 <span class="text-body-secondary">(Optional)</span></label>
+                        <input asp-for="purchase.BAddress2" type="text" class="form-control" id="address2" placeholder="Apartment or suite" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <label asp-for="purchase.BProvince" class="form-label">Province</label>
+                        <select asp-for="purchase.BProvince" class="form-select" id="province" OnClick="updateCity(this.value)">
+                            <option value="AB">Alberta</option>
+                            <option value="BC">British Columbia</option>
+                            <option value="MB">Manitoba</option>
+                            <option value="NL">Newfoundland and Labrador</option>
+                            <option value="NB">New Brunswick</option>
+                            <option value="NT">Northwest Territories</option>
+                            <option value="NS">Nova Scotia</option>
+                            <option value="NU">Nunavut</option>
+                            <option value="ON">Ontario</option>
+                            <option value="PE">Prince Edward Island</option>
+                            <option value="QC">Quebec</option>
+                            <option value="SK">Saskatchewan</option>
+                            <option value="YT">Yukon</option>
+                        </select>
+                        <span asp-validation-for="purchase.BProvince" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-8">
+                        <label asp-for="purchase.BCity" class="form-label">City</label>
+                        <select asp-for="purchase.BCity" class="form-select" id="city">
+                        </select>
+                        <span asp-validation-for="purchase.BCity" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="purchase.BPostalCode" class="form-label">Postal Code</label>
+                        <input asp-for="purchase.BPostalCode" type="text" class="form-control" id="zip" placeholder="" />
+                        <span asp-validation-for="purchase.BPostalCode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <h4 class="mb-3">Payment</h4>
+
+                <div class="my-3">
+                    <div class="form-check">
+                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked />
+                        <label class="form-check-label" htmlFor="credit">Credit card</label>
+                    </div>
+                    <div class="form-check">
+                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" />
+                        <label class="form-check-label" htmlFor="debit">Debit card</label>
+                    </div>
+                    <div class="form-check">
+                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" />
+                        <label class="form-check-label" htmlFor="paypal">PayPal</label>
+                    </div>
+                </div>
+
+                <div class="row gy-3">
+                    <div class="col-md-6">
+                        <label htmlFor="cc-name" class="form-label">Name on card</label>
+                        <input type="text" class="form-control" id="cc-name" placeholder="" />
+                        <small class="text-body-secondary">Full name as displayed on card</small>
                         <div class="invalid-feedback">
-                            Valid first name is required.
+                            Name on card is required
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label htmlFor="cc-number" class="form-label">Credit card number</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" />
+                        <div class="invalid-feedback">
+                            Credit card number is required
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label htmlFor="cc-expiration" class="form-label">Expiration</label>
+                        <input type="text" class="form-control" id="cc-expiration" placeholder="" />
+                        <div class="invalid-feedback">
+                            Expiration date required
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label htmlFor="cc-cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control" id="cc-cvv" placeholder="" />
+                        <div class="invalid-feedback">
+                            Security code required
                         </div>
                     </div>
                 </div>
-            </form>
-            <hr class="my-4" />
+                @for (var j = 0; j < Model.Ticket.Count; j++)
+                {
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Id)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Type)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Price)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Description)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Availability)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Quantity)
+                }
+                <hr class="my-4" />
 
-            <button class="w-100 btn btn-outline-secondary" type="submit">Continue to checkout</button>
+                <button class="w-100 btn btn-outline-secondary" type="submit">Continue to checkout</button>
+            </form>
         </div>
     </div>
 </div>
