@@ -15,11 +15,16 @@ namespace EMS_App.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Purchase>()
-                  .HasKey(m => new { m.Created, m.UserId });
+            modelBuilder.Entity<TicketPurchase>()
+                  .HasKey(m => new { m.OrderId, m.TicketId });
         }
 
-        public DbSet<EMS_App.Models.Ticket> Ticket { get; set; } = default!;
-        public DbSet<Purchase> Purchase { get; set; } = default;
+        public DbSet<Ticket> Ticket { get; set; } = default!;
+        public DbSet<Purchase> Purchase { get; set; } = default!;
+        public DbSet<Billing> Billing { get; set; } = default!;
+        public DbSet<Payment> Payment { get; set; } = default!;
+        public DbSet<TicketPurchase> TicketPurchase { get; set; } = default!;
+
+
     }
 }

@@ -33,20 +33,56 @@ namespace EMS_App.Controllers
         {
             CheckoutView checkoutView = new CheckoutView();
             checkoutView.Ticket = model.ToList();
+            checkoutView.Purchase = new Purchase();
+            checkoutView.Purchase.Uemail = "ac@asd.com";
             return View("Checkout", checkoutView);
         }
 
         [HttpPost]
         public IActionResult Checkout(CheckoutView model)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                model.purchase.Created = DateTime.Now;
-                model.purchase.BCity = "Halifax";
-                _context.Purchase.Add(model.purchase);
-                _context.SaveChanges();
+                using (var dbContextTransaction = _context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        _context.Billing.Add(model.Billing);
+                        _context.Payment.Add(model.Payment);
+                        _context.SaveChanges();
+                        model.Purchase.BillingId = model.Billing.BillingId;
+                        model.Purchase.PaymentId = model.Payment.PaymentId;
+                        model.Purchase.Created = DateTime.Now;
+                        _context.Purchase.Add(model.Purchase);
+                        _context.SaveChanges();
+                        TicketPurchase ticketpurchase = new TicketPurchase();
+                        for (int i = 0; i < model.Ticket.Count; i++)
+                        {
+                            if (model.Ticket[i].Quantity > 0)
+                            {
+                                ticketpurchase.OrderId = model.Purchase.OrderId;
+                                ticketpurchase.TicketId = model.Ticket[i].TicketId;
+                                ticketpurchase.Quantity = model.Ticket[i].Quantity;
+                                _context.TicketPurchase.Add(ticketpurchase);
+                                _context.SaveChanges();
+                            }
+                        }
+
+                        dbContextTransaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        //Log, handle or absorbe I don't care ^_^
+                    }
+                }
+                return RedirectToAction("Status", new { OrderId = model.Purchase.OrderId });
             }
             return View(model);
+        }
+        public IActionResult Status(int OrderId)
+        {
+            ViewData["OrderId"] = OrderId;
+            return View();
         }
     }
 }

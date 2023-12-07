@@ -7,25 +7,11 @@ namespace EMS_App.Models
     public class Purchase
     {
         [Key]
-        [Column(Order = 0)]
+        public int OrderId { get; set; }
+        public String Uemail { get; set; }
         public DateTime Created { get; set; }
-        [Key]
-        [Column(Order = 1)]
-        public int UserId { get; set; }
-        [Required] 
-        
-        public String BFirstName { get; set; }
-        [Required(ErrorMessage = "Name Is Required")]
-        [RegularExpression(@"^[^\d]+$", ErrorMessage = "Name cannot contain numbers")]
-        [DisplayName("Name")] 
-        public String BLastName { get; set; }
-        [Required]
-        public String BAddress1 { get; set; }
-        public String BAddress2 { get; set; }
-        public String BCity { get; set; }
-        [Required]
-        public String BProvince { get; set; }
-        [Required]
-        public String BPostalCode { get; set; }
+        public int Amount { get; set; }
+        public int PaymentId { get; set; }
+        public int BillingId { get; set; }
     }
 }

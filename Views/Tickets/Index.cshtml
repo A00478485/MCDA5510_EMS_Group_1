@@ -29,8 +29,8 @@
         var qty = 0;
         var param = "";
         $('[id^=qty_]').each(function () {
-            var index = this.id.split('qty_').pop();
-            var el = document.getElementById(this.id);
+            var index = this.TicketId.split('qty_').pop();
+            var el = document.getElementById(this.TicketId);
             qty += parseInt(el.value);
         });
         if (qty == 0) {
@@ -55,16 +55,16 @@
                         <p>Price: $@Html.DisplayFor(modelItem => Model[j].Price)<br />Available Tickets: @Html.DisplayFor(modelItem => Model[j].Availability)</p>
                     <h5>What's Included:</h5>
                         @Html.Raw(Model[j].Description)
-                        @Html.HiddenFor(modelItem => Model[j].Id)
+                        @Html.HiddenFor(modelItem => Model[j].TicketId)
                         @Html.HiddenFor(modelItem => Model[j].Type)
                         @Html.HiddenFor(modelItem => Model[j].Price)
                         @Html.HiddenFor(modelItem => Model[j].Description)
                         @Html.HiddenFor(modelItem => Model[j].Availability)
                     <div class="mb-4 input-group d-inline-flex align-items-center w-auto">
                         <div class="input-group">
-                                <button class="btn btn-default" type="button" OnClick="stepperMinus(@Model[j].Id)">-</button>
-                                @Html.TextBox("["+j+"].Quantity",Model[j].Quantity,new {@id="qty_"+@Model[j].Id, @class="form-control text-center", @max=@Model[j].Availability, @onchange="updateQuantity(this.id)"})
-                                <button class="btn btn-default" type="button" OnClick="stepperAdd(@Model[j].Id)">+</button>
+                                <button class="btn btn-default" type="button" OnClick="stepperMinus(@Model[j].TicketId)">-</button>
+                                @Html.TextBox("["+j+"].Quantity",Model[j].Quantity,new {@id="qty_"+@Model[j].TicketId, @class="form-control text-center", @max=@Model[j].Availability, @onchange="updateQuantity(this.TicketId)"})
+                                <button class="btn btn-default" type="button" OnClick="stepperAdd(@Model[j].TicketId)">+</button>
                         </div>
                     </div>
                 }

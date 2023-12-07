@@ -4,7 +4,7 @@ namespace EMS_App.Models
 {
     public class Ticket
     {
-        public int Id { get; set; }
+        public int TicketId { get; set; }
         public required string Type { get; set; }
         public int Price { get; set; }
         public required string Description { get; set; }
