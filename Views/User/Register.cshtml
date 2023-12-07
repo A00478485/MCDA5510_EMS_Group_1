@@ -1,46 +1,81 @@
-﻿<div class="container-fluid">
+﻿@model User
+<partial name="_Notification"/>
+
+
+<div class="container-fluid">
     <div class="row">
-        <!-- First Column - Image -->
         <div class="col-md-6">
             <img src="../wwwroot//image/JoinUs.png" class="img-fluid" alt="Join Us Image">
         </div>
 
-        <!-- Second Column - Signup Form -->
         <div class="col-md-6">
             <div class="row-md-3">
+                <div asp-validation-summary="All"></div>
+
                 <h2 class="text-center p-3">Sign-up here</h2>
             </div>
 
-            <form class="p-3">
+
+            <form method="post" class="p-3">
+                <span asp-validation-for="Uname" class="text-bg-danger"></span>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="bi bi-person"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" required>
+                    <input asp-for="Uname" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" required>
+
                 </div>
+                <span asp-validation-for="Uemail" class="text-bg-danger"></span>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="bi bi-envelope-exclamation"></i></span>
                     </div>
-                    <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon2" required>
+                    <input asp-for="Uemail" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon2" required>
+
+                    
                 </div>
+                <span asp-validation-for="Unumber" class="text-bg-danger"></span>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="bi bi-phone-vibrate"></i></span>      
                     </div>
-                    <input type="tel" class="form-control" placeholder="Phone Number" aria-label="Phone Number" aria-describedby="basic-addon3" required>
+                    <input asp-for="Unumber" type="text" class="form-control" placeholder="Phone Number" aria-label="Phone Number" aria-describedby="basic-addon3" required>
+                   
+
                 </div>
+                <span asp-validation-for="Udob" class="text-bg-danger"></span>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="bi bi-calendar-check"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Date of Birth" aria-label="Date of Birth" aria-describedby="basic-addon4" required>
+                    <input asp-for="Udob" type="date" class="form-control" placeholder="Date of Birth" aria-label="Date of Birth" aria-describedby="basic-addon4" required>
+
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                <span asp-validation-for="Password" class="text-bg-danger"></span>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    </div>
+                    <input asp-for="Password" type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon5" required>
+
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    </div>
+                    <input asp-for="RePassword" type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon6" required>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign up</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary border-1 form-control">Aleardy With Us</a>
             </form>
         </div>
     </div>

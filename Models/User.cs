@@ -6,7 +6,6 @@ namespace EMS_App.Models
 {
     public class User
     {
-        public int UserId { get; set; }
         [Required(ErrorMessage = "Name Is Required")]
         [RegularExpression(@"^[^\d]+$", ErrorMessage = "Name cannot contain numbers")]
         [DisplayName("Name")]
@@ -21,11 +20,16 @@ namespace EMS_App.Models
         [DisplayName("Email Address")]
         [Key]
         public string Uemail { get; set; }
-        [Required(ErrorMessage = "Canadian or USA Mobile Number is required")]
-        [RegularExpression(@"^(\+?1\s?[-.\s]?)?(\(\d{3}\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}$", ErrorMessage = "Invalid Mobile Number")]
-        [DisplayName("Mobile Number")]
 
+        [DisplayName("Mobile Number")] 
         public int Unumber { get; set; }
+
+        [DisplayName("Password")]
+        [StringLength(10, ErrorMessage = "Password should contain at least 10 characters")]
+        public string Password { get; set; }
+
+        public string RePassword { get; set; }
+
 
 
 

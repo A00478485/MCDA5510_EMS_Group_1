@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EMS_App.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EMS_App.Data
 {
@@ -9,8 +10,12 @@ namespace EMS_App.Data
         {
 
         }
+        public DbSet<User> User { get; set; }
+        public DbSet<Speaker> Speaker { get; set; }
 
-    
-        
+
+
+
+
     }
 }

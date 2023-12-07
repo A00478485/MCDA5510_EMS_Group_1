@@ -1,0 +1,43 @@
+﻿@model User
+<partial name="_Notification" />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="../wwwroot//image/JoinUs.png" class="img-fluid" alt="Join Us Image">
+        </div>
+
+        <div class="col-md-6">
+            <div class="row-md-3">
+                <div asp-validation-summary="All"></div>
+
+                <h2 class="text-center p-3">Login here</h2>
+            </div>
+
+
+            <form method="post" class="p-3">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-envelope-exclamation"></i></span>
+                    </div>
+                    <input asp-for="Uemail" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon2" required>
+
+
+                </div>
+
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    </div>
+                    <input asp-for="Password" type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon5" required>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign up</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary border-1 form-control">New here</a>
+            </form>
+        </div>
+    </div>
+</div>
