@@ -1,0 +1,93 @@
+﻿@model List<EMS_App.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Tickets";
+}
+<script language="javascript" type="text/javascript">
+    function stepperMinus(id) {
+        var el = document.getElementById("qty_" + id);
+        if (parseInt(el.value) > 0)
+            el.value = parseInt(el.value) - 1;
+    }
+    function stepperAdd(id) {
+        console.log(id);
+        var el = document.getElementById("qty_" + id);
+        console.log(el);
+        if (parseInt(el.value) < parseInt(el.max))
+            el.value = parseInt(el.value) + 1;
+    }
+    function updateQuantity(id) {
+        var el = document.getElementById(id);
+        if (isNaN(parseInt(el.value)))
+            el.value = 0;
+        else if (parseInt(el.value) < 0)
+            el.value = 0;
+        else if (parseInt(el.value) > parseInt(el.max))
+            el.value = parseInt(el.max);
+    }
+    function validateForm(event) {
+        var qty = 0;
+        var param = "";
+        $('[id^=qty_]').each(function () {
+            var index = this.TicketId.split('qty_').pop();
+            var el = document.getElementById(this.TicketId);
+            qty += parseInt(el.value);
+        });
+        if (qty == 0) {
+            document.getElementById("validation").innerHTML = "Please input the quantity first!";
+            event.preventDefault();
+        }
+    }
+</script>
+
+<div class="container">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Ticket Details</h1>
+    </div>
+    <div class="row align-items-md-stretch">
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                @using (Html.BeginForm("ProceedtoCheckout", "Tickets", FormMethod.Post, new { onsubmit = "validateForm(event)" }))
+                {                
+                @for (var j=0;j<Model.Count;j++)
+                {
+                    <h2>@Html.DisplayFor(modelItem => Model[j].Type) Admission</h2>
+                        <p>Price: $@Html.DisplayFor(modelItem => Model[j].Price)<br />Available Tickets: @Html.DisplayFor(modelItem => Model[j].Availability)</p>
+                    <h5>What's Included:</h5>
+                        @Html.Raw(Model[j].Description)
+                        @Html.HiddenFor(modelItem => Model[j].TicketId)
+                        @Html.HiddenFor(modelItem => Model[j].Type)
+                        @Html.HiddenFor(modelItem => Model[j].Price)
+                        @Html.HiddenFor(modelItem => Model[j].Description)
+                        @Html.HiddenFor(modelItem => Model[j].Availability)
+                    <div class="mb-4 input-group d-inline-flex align-items-center w-auto">
+                        <div class="input-group">
+                                <button class="btn btn-default" type="button" OnClick="stepperMinus(@Model[j].TicketId)">-</button>
+                                @Html.TextBox("["+j+"].Quantity",Model[j].Quantity,new {@id="qty_"+@Model[j].TicketId, @class="form-control text-center", @max=@Model[j].Availability, @onchange="updateQuantity(this.TicketId)"})
+                                <button class="btn btn-default" type="button" OnClick="stepperAdd(@Model[j].TicketId)">+</button>
+                        </div>
+                    </div>
+                }
+                <div class="align-items-center w-auto">
+                    <button class="btn btn-outline-secondary" type="submit" id="checkout")">Buy Now</button>
+                    <div id="validation" class="text-danger">
+                    </div>
+                    </div>
+                    }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                <h2>How to Purchase</h2>
+                <ol type="1">
+                    <li>Select your desired ticket quantity.</li>
+                    <li>Click the "Buy Now" button.</li>
+                    <li>Complete the secure checkout process.</li>
+                </ol>
+                <p>Please note that ticket availability is limited, so act fast to secure your spot at [Event Name]. </p>
+                <p>We look forward to welcoming you to an unforgettable experience!</p>
+                <p>For any inquiries or assistance, feel free to contact our dedicated Customer Support Team.</p>
+            </div>
+        </div>
+    </div>
+</div>

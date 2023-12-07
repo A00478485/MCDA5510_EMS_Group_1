@@ -1,3 +1,7 @@
+using EMS_App.Data;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+using Microsoft.EntityFrameworkCore;
+
 namespace EMS_App
 {
     public class Program
@@ -5,6 +9,13 @@ namespace EMS_App
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<EMSContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EMSContext") ?? throw new InvalidOperationException("Connection string 'EMSContext' not found.")));
+
+            builder.Services.AddControllers(options =>
+            {
+                options.ModelMetadataDetailsProviders.Add(new SystemTextJsonValidationMetadataProvider());
+            });
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
