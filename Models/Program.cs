@@ -3,9 +3,10 @@ using System.ComponentModel;
 
 namespace EMS_App.Models
 {
-    public class Event
+    public class Program
     {
         [DisplayName("Event ID")]
+        [Key]
         public Guid eventID { get; set; }
 
         [Required]

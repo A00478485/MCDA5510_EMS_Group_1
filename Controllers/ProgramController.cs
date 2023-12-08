@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EMS_App.Controllers
 {
-    public class EventsController : Controller
+    public class ProgramController : Controller
     {
         private readonly EMSContext eMSContext;
 
-        public EventsController(EMSContext eMSContext)
+        public ProgramController(EMSContext eMSContext)
         {
             this.eMSContext = eMSContext;
         }
@@ -17,7 +17,7 @@ namespace EMS_App.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var events = await eMSContext.events.ToListAsync<Event>();
+            var events = await eMSContext.events.ToListAsync();
             var newEve = events.OrderBy(m => m.eventStartTime).ToList();
             return View(newEve);
         }
@@ -29,9 +29,9 @@ namespace EMS_App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Event e)
+        public async Task<IActionResult> Add(Models.Program e)
         {
-            var ent = new Event()
+            var ent = new Models.Program()
             {
                 eventDescription = e.eventDescription,
                 eventID = new Guid(),
