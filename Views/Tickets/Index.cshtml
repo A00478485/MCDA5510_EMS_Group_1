@@ -17,6 +17,7 @@
             el.value = parseInt(el.value) + 1;
     }
     function updateQuantity(id) {
+        console.log(id);
         var el = document.getElementById(id);
         if (isNaN(parseInt(el.value)))
             el.value = 0;
@@ -63,7 +64,7 @@
                         <div class="mb-4 input-group d-inline-flex align-items-center w-auto">
                             <div class="input-group">
                                 <button class="btn btn-default" type="button" OnClick="stepperMinus(@Model[j].TicketId)">-</button>
-                                @Html.TextBox("["+j+"].Quantity",Model[j].Quantity,new {@id="qty_"+@Model[j].TicketId, @class="form-control text-center", @max=@Model[j].Availability, @onchange="updateQuantity(this.TicketId)"})
+                                @Html.TextBox("["+j+"].Quantity",Model[j].Quantity,new {@id="qty_"+@Model[j].TicketId, @class="form-control text-center", @max=@Model[j].Availability, @onchange="updateQuantity(this.id)"})
                                 <button class="btn btn-default" type="button" OnClick="stepperAdd(@Model[j].TicketId)">+</button>
                             </div>
                         </div>

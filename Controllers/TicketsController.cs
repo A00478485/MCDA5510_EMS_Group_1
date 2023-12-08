@@ -46,9 +46,9 @@ namespace EMS_App.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var dbContextTransaction = _context.Database.BeginTransaction())
+                try
                 {
-                    try
+                    using (var dbContextTransaction = _context.Database.BeginTransaction())
                     {
                         _context.Billing.Add(model.Billing);
                         _context.Payment.Add(model.Payment);
@@ -68,7 +68,8 @@ namespace EMS_App.Controllers
                                 ticketpurchase.Quantity = model.Ticket[i].Quantity;
                                 _context.TicketPurchase.Add(ticketpurchase);
                                 var ava = _context.Ticket.Find(ticketpurchase.TicketId);
-                                if (ava != null) { 
+                                if (ava != null)
+                                {
                                     ava.Availability = ava.Availability - ticketpurchase.Quantity;
                                     _context.Update(ava);
                                 }
@@ -77,10 +78,10 @@ namespace EMS_App.Controllers
                         }
                         dbContextTransaction.Commit();
                     }
-                    catch (Exception ex)
-                    {
-                        return View("Status", model);
-                    }
+                }
+                catch (Exception ex)
+                {
+                    return View("Status", model);
                 }
                 //return RedirectToAction("Status", new { OrderId = model.Purchase.OrderId});
                 return View("Status", model);
@@ -137,7 +138,8 @@ namespace EMS_App.Controllers
             {
                 if (!Regex.Match(PostalCode, "^[0-9]{5}(?:-[0-9]{4})?$").Success)
                     return Json($"Invalid US Postal Code");
-            } else if (Country.Equals("Canada"))
+            }
+            else if (Country.Equals("Canada"))
             {
                 if (!Regex.Match(PostalCode.ToUpper(), "^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] [0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$").Success)
                     return Json($"Invalid CA Postal Code");
