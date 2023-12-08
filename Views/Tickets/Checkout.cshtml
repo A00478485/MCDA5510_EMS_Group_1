@@ -41,7 +41,22 @@
         </div>
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Billing address</h4>
-            <form asp-controller="Tickets" asp-action="Checkout" method="post" class="mt-3">
+            @using (Html.BeginForm("Checkout", "Tickets", FormMethod.Post, new { onsubmit = "validateForm(event)" }))
+            {
+                @for (var j = 0; j < Model.Ticket.Count; j++)
+                {
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].TicketId)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Type)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Price)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Description)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Availability)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Quantity)
+                }
+                @Html.HiddenFor(modelItem => Model.Purchase.Uemail)
+                @Html.HiddenFor(modelItem => Model.Purchase.Amount)
+
+                Model.Purchase.Amount = @price;
+
                 <div class="form-group row g-3">
                     <div class="col-sm-6">
                         <label asp-for="Billing.BFirstName" class="form-label">First name</label>
@@ -98,7 +113,7 @@
 
                 <div class="my-3">
                     <div class="form-check">
-                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" id="cardtypeVisa" value="Visa" checked/>
+                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" id="cardtypeVisa" value="Visa" checked />
                         <label asp-for="Payment.CardType" class="form-check-label">Visa Card</label>
                     </div>
                     <div class="form-check">
@@ -121,8 +136,9 @@
 
                     <div class="col-md-6">
                         <label asp-for="Payment.CardNumber" class="form-label">Card number</label>
-                        <input asp-for="Payment.CardNumber" type="text" class="form-control" name="cardnumber" placeholder="" />
+                        <input asp-for="Payment.CardNumber" type="text" class="form-control" name="Payment.CardNumber" placeholder="" />
                         <span asp-validation-for="Payment.CardNumber" class="text-danger"></span>
+
                     </div>
 
                     <div class="col-md-4">
@@ -143,25 +159,11 @@
                         <span asp-validation-for="Payment.CVV" class="text-danger"></span>
                     </div>
                 </div>
-                @{
-                    Model.Purchase.Amount = @price;
-                }
-                @Html.HiddenFor(modelItem => Model.Purchase.Uemail)
-                @Html.HiddenFor(modelItem => Model.Purchase.Amount)
 
-                @for (var j = 0; j < Model.Ticket.Count; j++)
-                {
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].TicketId)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Type)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Price)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Description)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Availability)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Quantity)
-                }
                 <hr class="my-4" />
 
                 <button class="w-100 btn btn-outline-secondary" type="submit">Continue to checkout</button>
-            </form>
+            }
         </div>
     </div>
 </div>

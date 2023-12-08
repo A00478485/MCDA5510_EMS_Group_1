@@ -11,11 +11,11 @@ namespace EMS_App.Models
         public int PaymentId { get; set; }
         [Required]
         [DisplayName("Name On Card")]
-        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ?!.*[;:!@#$%^*+?\\/<>0123456789")]
+        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ?!.*;:!@#$%^*+?\\/<>0123456789")]
         public string CardName {  get; set; }
         [Required]
         [DisplayName("Card Number")]
-        [RegularExpression("^[4][0-9]{15}|[5][2-4][0-9]{14}$", ErrorMessage = "Invalid Card Number/Type")]
+        [Remote("ValidateCard", "Tickets", AdditionalFields = "CardName,CardType", ErrorMessage = "Invalid Card Type/Number")]
         public long CardNumber { get; set; }
         [Required]
         [DisplayName("Card Type")]

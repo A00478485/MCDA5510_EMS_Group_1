@@ -67,8 +67,10 @@ namespace EMS_App.Controllers
                                 ticketpurchase.Quantity = model.Ticket[i].Quantity;
                                 _context.TicketPurchase.Add(ticketpurchase);
                                 var ava = _context.Ticket.Find(ticketpurchase.TicketId);
-                                ava.Availability = ava.Availability - ticketpurchase.Quantity;
-                                _context.Update(ava);
+                                if (ava != null) { 
+                                    ava.Availability = ava.Availability - ticketpurchase.Quantity;
+                                    _context.Update(ava);
+                                }
                                 _context.SaveChanges();
                             }
                         }
@@ -89,5 +91,42 @@ namespace EMS_App.Controllers
             return View();
         }
 
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult ValidateCard([Bind(Prefix = "Payment.CardNumber")] long CardNumber, [Bind(Prefix = "Payment.CardName")] String CardName, [Bind(Prefix = "Payment.CardType")] String CardType)
+        {
+            String numberString = CardNumber.ToString();
+
+            if (numberString.Length < 15 || numberString.Length > 16)
+            {
+                return Json($"Invalid Card Length");
+            }
+            if (CardType.Equals("Visa"))
+            {
+                if (!(numberString.StartsWith("4") && numberString.Length == 16))
+                {
+                    return Json($"Invalid Visa Card Number");
+                }
+            }
+            if (CardType.Equals("Master Card"))
+            {
+                int CardNumberPrefix = int.Parse(numberString.Substring(0, 2));
+                if (!((CardNumberPrefix >= 51 && CardNumberPrefix <= 55) && numberString.Length == 16))
+                {
+                    return Json($"Invalid Master Card Number");
+                }
+            }
+            if (CardType.Equals("American Express"))
+            {
+                if (numberString.Length != 15)
+                {
+                    return Json($"Invalid American Express Number");
+                }
+                if (!(numberString.StartsWith("34") || numberString.StartsWith("37")))
+                {
+                    return Json($"Invalid American Express Number");
+                }
+            }
+            return Json(true);
+        }
     }
 }
