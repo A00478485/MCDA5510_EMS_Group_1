@@ -1,0 +1,168 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model CheckoutView
+@{
+    ViewData["Title"] = "Checkout";
+}
+<div class="container">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Checkout</h1>
+    </div>
+
+    <div class="row g-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span>Your cart</span>
+            </h4>
+            <ul class="list-group mb-3">
+                @{
+                    int price = 0;
+                }
+                @for (var j = 0; j < Model.Ticket.Count; j++)
+                {
+                    if (Model.Ticket[j].Quantity == 0)
+                        continue;
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">@Html.DisplayFor(modelItem => Model.Ticket[j].Type)</h6>
+                            <small class="text-body-secondary">Quantity: @Html.DisplayFor(modelItem => Model.Ticket[j].Quantity)</small>
+                        </div>
+                        <span class="text-body-secondary">$@Html.DisplayFor(modelItem => Model.Ticket[j].Price)</span>
+                    </li>
+                    price += Model.Ticket[j].Price * Model.Ticket[j].Quantity;
+                }
+
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total (CAD)</span>
+                    <strong>$@String.Format("{0:0,0}",price) </strong>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Billing address</h4>
+            @using (Html.BeginForm("Checkout", "Tickets", FormMethod.Post, new { onsubmit = "validateForm(event)" }))
+            {
+                @for (var j = 0; j < Model.Ticket.Count; j++)
+                {
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].TicketId)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Type)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Price)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Description)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Availability)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Quantity)
+                }
+                Model.Purchase.Amount = price;
+                @Html.HiddenFor(modelItem => Model.Purchase.Uemail)
+                @Html.HiddenFor(modelItem => Model.Purchase.Amount)
+
+                <div class="form-group row g-3">
+                    <div class="col-sm-6">
+                        <label asp-for="Billing.BFirstName" class="form-label">First name</label>
+                        <input asp-for="Billing.BFirstName" class="form-control" placeholder="" />
+                        <span asp-validation-for="Billing.BFirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label asp-for="Billing.BLastName" class="form-label">Last name</label>
+                        <input asp-for="Billing.BLastName" type="text" class="form-control" id="lastName" placeholder="" />
+                        <span asp-validation-for="Billing.BLastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Billing.BAddress1" class="form-label">Address</label>
+                        <input asp-for="Billing.BAddress1" type="text" class="form-control" id="address" placeholder="1234 Main St" />
+                        <span asp-validation-for="Billing.BAddress1" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Billing.BAddress2" class="form-label">Address 2 <span class="text-body-secondary">(Optional)</span></label>
+                        <input asp-for="Billing.BAddress2" type="text" class="form-control" id="address2" placeholder="Apartment or suite" />
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Billing.BCountry" class="form-label">Country</label>
+                        <select asp-for="Billing.BCountry" class="form-select" id="country" OnClick="updateProvince(this.value)">
+                            <option value="Canada">Canada</option>
+                            <option value="United State">United State</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label asp-for="Billing.BProvince" class="form-label">Province</label>
+                        <input asp-for="Billing.BProvince" type="text" class="form-control" id="province" placeholder="" />
+                        <span asp-validation-for="Billing.BProvince" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-8">
+                        <label asp-for="Billing.BCity" class="form-label">City</label>
+                        <input asp-for="Billing.BCity" type="text" class="form-control" id="city" placeholder="" />
+                        <span asp-validation-for="Billing.BCity" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Billing.BPostalCode" class="form-label">Postal Code</label>
+                        <input asp-for="Billing.BPostalCode" type="text" class="form-control" id="zip" placeholder="" />
+                        <span asp-validation-for="Billing.BPostalCode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <h4 class="mb-3">Payment</h4>
+
+                <div class="my-3">
+                    <div class="form-check">
+                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" id="cardtypeVisa" value="Visa" checked />
+                        <label asp-for="Payment.CardType" class="form-check-label">Visa Card</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" id="cardtypeMaster" value="Master Card" />
+                        <label asp-for="Payment.CardType" class="form-check-label">Master Card</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" id="cardtypeAE" value="American Express" />
+                        <label asp-for="Payment.CardType" class="form-check-label">American Express</label>
+                    </div>
+                </div>
+
+                <div class="row gy-3">
+                    <div class="col-md-6">
+                        <label asp-for="Payment.CardName" class="form-label">Name on card</label>
+                        <input asp-for="Payment.CardName" type="text" class="form-control" placeholder="" />
+                        <small class="text-body-secondary">Full name as displayed on card</small><br />
+                        <span asp-validation-for="Payment.CardName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Payment.CardNumber" class="form-label">Card number</label>
+                        <input asp-for="Payment.CardNumber" type="text" class="form-control" name="Payment.CardNumber" placeholder="" />
+                        <span asp-validation-for="Payment.CardNumber" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Expiration Month</label>
+                        <input asp-for="Payment.ExpiryDateMonth" type="text" class="form-control" placeholder="MM" />
+                        <span asp-validation-for="Payment.ExpiryDateMonth" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Expiration Year</label>
+                        <input asp-for="Payment.ExpiryDateYear" type="text" class="form-control" placeholder="YYYY" />
+                        <span asp-validation-for="Payment.ExpiryDateYear" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Payment.CVV" class="form-label">CVV</label>
+                        <input asp-for="Payment.CVV" type="text" class="form-control" placeholder="" />
+                        <span asp-validation-for="Payment.CVV" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <button class="w-100 btn btn-outline-secondary" type="submit">Continue to checkout</button>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@model EMS_App.Models.Program
+<div class="mb-3"><h1>Add Event</h1></div>
+
+<form method="post" action="Add">
+    <div class="mb-3">
+        <label for="" class="form-label">Event Heading</label>
+        <input type="text" class="form-control" asp-for="eventHeader" placeholder="Enter event heading here"/>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Event Short Description</label>
+        <input type="text" class="form-control" asp-for="eventShortDescription" placeholder="Enter event short description (two lines) here" />
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Event Description</label>
+        <textarea class="form-control" id="tiny" asp-for="eventDescription" placeholder="Enter event description here"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Event Start Time</label>
+        <input type="datetime-local" class="form-control" asp-for="eventStartTime"/>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Event End Time</label>
+        <input type="datetime-local" class="form-control" asp-for="eventEndTime" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+    <a class="btn btn-default" asp-area="" asp-controller="Events" asp-action="Index">Cancel</a>
+</form>
+
+
