@@ -13,10 +13,18 @@ namespace EMS_App.Controllers
         {
             this.eMSContext = eMSContext;
         }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var events = await eMSContext.events.ToListAsync<Event>();
             return View(events);
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
         }
     }
 }

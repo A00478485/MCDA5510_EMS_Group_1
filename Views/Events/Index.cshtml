@@ -5,7 +5,7 @@
 <ul class="timeline">
     <li class="timeline-line"></li>
     <li class="timeline-group">
-        <a href="#" class="btn btn-primary"><i class="fa fa-calendar"></i> Today</a>
+        <a href="#" class="btn btn-primary"><i class="fa fa-calendar"></i>December 6th, 2023</a>
     </li>
 </ul>
 <ul class="timeline">
@@ -17,10 +17,10 @@
             <div class="timeline-panel">
                 <div class="timeline-heading">
                     @e.eventHeader
-                    <div class="timeline-date"><i class="fa fa-clock-o"></i> @e.eventStartTime.ToString("MMM-dd-yyyy HH:mm")</div>
+                    <div class="timeline-date"><i class="fa fa-clock-o"></i> @e.eventStartTime.ToString("MMMM dd, yyyy - HH:mm")</div>
                 </div>
                 <div class="timeline-content">
-                    <p>@e.eventDescription</p>
+                    <p>@Html.Raw(e.eventShortDescription)</p>
                 </div>
                 <div class="timeline-footer">
                     <small class="text-muted">Duration = @(e.eventEndTime - e.eventStartTime)</small>
@@ -128,8 +128,9 @@
                             </a>
                         </p>
                         <h4>Event Location - SMU</h4>
-                        <p class="timeline-date">November 1, 2014</p>
-                        <p>Eu pid nunc urna integer, sed, cras tortor scelerisque penatibus facilisis a pulvinar, rhoncus sagittis ut nunc elit! Sociis in et? Rhoncus, vel dignissim in scelerisque. Dolor lacus pulvinar adipiscing adipiscing montes! Elementum risus adipiscing non, cras scelerisque risus penatibus? Massa vut, habitasse, tincidunt!</p>
+                        <p class="timeline-date">From 9 AM on December 6th, 2023 onwards till 6 PM on December 7th, 2023</p>
+                        <p>The SMU Tech Summit will welcome technology leaders, industry disruptors and tech workers from across our 4 Atlantic provinces and beyond.</p>
+                        <p>Theme for this year is <b>“The Future is now”</b>.</p>
                         <div class="timeline-embed">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2839.3220753009755!2d-63.584031924069805!3d44.63133388862253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b5a223f94860a5d%3A0xdd0961dfd426d80d!2sSaint%20Mary&#39;s%20University!5e0!3m2!1sen!2sca!4v1702009804583!5m2!1sen!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
@@ -138,3 +139,4 @@
             </div>
         </li>
     </ul>
+</ul>
