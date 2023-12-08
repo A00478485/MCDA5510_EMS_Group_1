@@ -9,6 +9,7 @@ using EMS_App.Data;
 using EMS_App.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.VisualBasic;
+using System.Text.RegularExpressions;
 
 namespace EMS_App.Controllers
 {
@@ -125,6 +126,21 @@ namespace EMS_App.Controllers
                 {
                     return Json($"Invalid American Express Number");
                 }
+            }
+            return Json(true);
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult ValidatePostalCode([Bind(Prefix = "Billing.BPostalCode")] String PostalCode, [Bind(Prefix = "Billing.BCountry")] String Country)
+        {
+            if (Country.Equals("United State"))
+            {
+                if (!Regex.Match(PostalCode, "^[0-9]{5}(?:-[0-9]{4})?$").Success)
+                    return Json($"Invalid US Postal Code");
+            } else if (Country.Equals("Canada"))
+            {
+                if (!Regex.Match(PostalCode.ToUpper(), "^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] [0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$").Success)
+                    return Json($"Invalid CA Postal Code");
             }
             return Json(true);
         }
