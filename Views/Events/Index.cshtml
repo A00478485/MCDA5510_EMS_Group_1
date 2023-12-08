@@ -10,6 +10,24 @@
 </ul>
 <ul class="timeline">
     <li class="timeline-line"></li>
+    @foreach(Event e in Model)
+    {
+        <li class="timeline-item">
+            <div class="timeline-badge"><a href="#"></a></div>
+            <div class="timeline-panel">
+                <div class="timeline-heading">
+                    @e.eventHeader
+                    <div class="timeline-date"><i class="fa fa-clock-o"></i> @e.eventStartTime.ToString("MMM-dd-yyyy HH:mm")</div>
+                </div>
+                <div class="timeline-content">
+                    <p>@e.eventDescription</p>
+                </div>
+                <div class="timeline-footer">
+                    <small class="text-muted">Timeline Footer</small>
+                </div>
+            </div>
+        </li>
+    }
     <li class="timeline-item">
         <div class="timeline-badge"><a href="#"></a></div>
         <div class="timeline-panel">
