@@ -27,7 +27,7 @@ namespace EMS_App.Models
         public string ExpiryDateMonth { get; set; }
         [Required]
         [DisplayName("Expiry Date Year")]
-        [RegularExpression("[2][2-9]|[3][0-7]", ErrorMessage = "Please input vaild Year")]
+        [RegularExpression("[2][0][1][6-9]|[2][0][2][0-9]|[2][0][3][0-1]", ErrorMessage = "Please input vaild Year")]
         public string ExpiryDateYear { get; set; }
         [NotMapped]
         [Required]

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EMS_App.Data;
 using EMS_App.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualBasic;
 
 namespace EMS_App.Controllers
 {
@@ -64,10 +66,12 @@ namespace EMS_App.Controllers
                                 ticketpurchase.TicketId = model.Ticket[i].TicketId;
                                 ticketpurchase.Quantity = model.Ticket[i].Quantity;
                                 _context.TicketPurchase.Add(ticketpurchase);
+                                var ava = _context.Ticket.Find(ticketpurchase.TicketId);
+                                ava.Availability = ava.Availability - ticketpurchase.Quantity;
+                                _context.Update(ava);
                                 _context.SaveChanges();
                             }
                         }
-
                         dbContextTransaction.Commit();
                     }
                     catch (Exception ex)
@@ -84,5 +88,6 @@ namespace EMS_App.Controllers
             ViewData["OrderId"] = OrderId;
             return View();
         }
+
     }
 }

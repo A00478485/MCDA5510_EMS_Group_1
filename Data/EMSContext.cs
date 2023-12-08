@@ -24,7 +24,5 @@ namespace EMS_App.Data
         public DbSet<Billing> Billing { get; set; } = default!;
         public DbSet<Payment> Payment { get; set; } = default!;
         public DbSet<TicketPurchase> TicketPurchase { get; set; } = default!;
-
-
     }
 }

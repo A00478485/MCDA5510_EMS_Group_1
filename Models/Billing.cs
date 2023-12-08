@@ -21,13 +21,19 @@ namespace EMS_App.Models
         public String? BAddress2 { get; set; }
         [Required]
         [DisplayName("City")]
+        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ?!.*[;:!@#$%^*+?\\/<>0123456789")]
         public required String BCity { get; set; }
         [Required]
         [DisplayName("Province")]
+        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ?!.*[;:!@#$%^*+?\\/<>0123456789")]
         public required String BProvince { get; set; }
         [Required]
         [RegularExpression("[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]", ErrorMessage = "Invalid Postal Code")]
         [DisplayName("Postal Code")]
         public required String BPostalCode { get; set; }
+
+        [Required]
+        [DisplayName("Country")]
+        public required String BCountry { get; set; }
     }
 }
