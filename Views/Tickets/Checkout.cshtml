@@ -5,39 +5,6 @@
 @{
     ViewData["Title"] = "Checkout";
 }
-<script language="javascript" type="text/javascript">
-    function updateCity(valueSelected) {
-        console.log(valueSelected);
-        $("#city option").remove();
-        if (valueSelected == "AB") {
-            $("#city").append("<option value=\"Banff\">Banff</option><option value=\"Brooks\">Brooks</option><option value=\"Calgary\">Calgary</option><option value=\"Edmonton\">Edmonton</option><option value=\"Fort McMurray\">Fort McMurray</option><option value=\"Grande Prairie\">Grande Prairie</option><option value=\"Jasper\">Jasper</option><option value=\"Lake Louise\">Lake Louise</option><option value=\"Lethbridge\">Lethbridge</option><option value=\"Medicine Hat\">Medicine Hat</option><option value=\"Red Deer\">Red Deer</option><option value=\"Saint Albert\">Saint Albert</option>");
-        } else if (valueSelected == "BC") {
-            $("#city").append("<option value=\"Barkerville\">Barkerville</option><option value=\"Burnaby\">Burnaby</option><option value=\"Campbell River\">Campbell River</option><option value=\"Chilliwack\">Chilliwack</option><option value=\"Courtenay\">Courtenay</option><option value=\"Cranbrook\">Cranbrook</option><option value=\"Dawson Creek\">Dawson Creek</option><option value=\"Delta\">Delta</option><option value=\"Esquimalt\">Esquimalt</option><option value=\"Fort Saint James\">Fort Saint James</option><option value=\"Fort Saint John\">Fort Saint John</option><option value=\"Hope\">Hope</option><option value=\"Kamloops\">Kamloops</option><option value=\"Kelowna\">Kelowna</option><option value=\"Kimberley\">Kimberley</option><option value=\"Kitimat\">Kitimat</option><option value=\"Langley\">Langley</option><option value=\"Nanaimo\">Nanaimo</option><option value=\"Nelson\">Nelson</option><option value=\"New Westminster\">New Westminster</option><option value=\"North Vancouver\">North Vancouver</option><option value=\"Oak Bay\">Oak Bay</option><option value=\"Penticton\">Penticton</option><option value=\"Powell River\">Powell River</option><option value=\"Prince George\">Prince George</option><option value=\"Prince Rupert\">Prince Rupert</option><option value=\"Quesnel\">Quesnel</option><option value=\"Revelstoke\">Revelstoke</option><option value=\"Rossland\">Rossland</option><option value=\"Trail\">Trail</option><option value=\"Vancouver\">Vancouver</option><option value=\"Vernon\">Vernon</option><option value=\"Victoria\">Victoria</option><option value=\"West Vancouver\">West Vancouver</option><option value=\"White Rock\">White Rock</option>");
-        } else if (valueSelected == "MB") {
-            $("#city").append("<option value=\"Brandon\">Brandon</option><option value=\"Churchill\">Churchill</option><option value=\"Dauphin\">Dauphin</option><option value=\"Flin Flon\">Flin Flon</option><option value=\"Kildonan\">Kildonan</option><option value=\"Saint Boniface\">Saint Boniface</option><option value=\"Swan River\">Swan River</option><option value=\"Thompson\">Thompson</option><option value=\"Winnipeg\">Winnipeg</option><option value=\"York Factory\">York Factory</option>");
-        } else if (valueSelected == "NB") {
-            $("#city").append("<option value=\"Bathurst\">Bathurst</option><option value=\"Caraquet\">Caraquet</option><option value=\"Dalhousie\">Dalhousie</option><option value=\"Fredericton\">Fredericton</option><option value=\"Miramichi\">Miramichi</option><option value=\"Moncton\">Moncton</option><option value=\"Saint John\">Saint John</option>");
-        } else if (valueSelected == "NL") {
-            $("#city").append("<option value=\"Argentia\">Argentia</option><option value=\"Bonavista\">Bonavista</option><option value=\"Channel-Port aux Basques\">Channel-Port aux Basques</option><option value=\"Corner Brook\">Corner Brook</option><option value=\"Ferryland\">Ferryland</option><option value=\"Gander\">Gander</option><option value=\"Grand Falls–Windsor\">Grand Falls–Windsor</option><option value=\"Happy Valley–Goose Bay\">Happy Valley–Goose Bay</option><option value=\"Harbour Grace\">Harbour Grace</option><option value=\"Labrador City\">Labrador City</option><option value=\"Placentia\">Placentia</option><option value=\"Saint Anthony\">Saint Anthony</option><option value=\"St. John’s\">St. John’s</option><option value=\"Wabana\">Wabana</option>");
-        } else if (valueSelected == "NT") {
-            $("#city").append("<option value=\"Fort Smith\">Fort Smith</option><option value=\"Hay River\">Hay River</option><option value=\"Inuvik\">Inuvik</option><option value=\"Tuktoyaktuk\">Tuktoyaktuk</option><option value=\"Yellowknife\">Yellowknife</option>");
-        } else if (valueSelected == "NS") {
-            $("#city").append("<option value=\"Baddeck\">Baddeck</option><option value=\"Digby\">Digby</option><option value=\"Glace Bay\">Glace Bay</option><option value=\"Halifax\">Halifax</option><option value=\"Liverpool\">Liverpool</option><option value=\"Louisbourg\">Louisbourg</option><option value=\"Lunenburg\">Lunenburg</option><option value=\"Pictou\">Pictou</option><option value=\"Port Hawkesbury\">Port Hawkesbury</option><option value=\"Springhill\">Springhill</option><option value=\"Sydney\">Sydney</option><option value=\"Yarmouth\">Yarmouth</option>");
-        } else if (valueSelected == "NU") {
-            $("#city").append("<option value=\"Iqaluit\">Iqaluit</option>");
-        } else if (valueSelected == "ON") {
-            $("#city").append("<option value=\"Bancroft\">Bancroft</option><option value=\"Barrie\">Barrie</option><option value=\"Belleville\">Belleville</option><option value=\"Brampton\">Brampton</option><option value=\"Brantford\">Brantford</option><option value=\"Brockville\">Brockville</option><option value=\"Burlington\">Burlington</option><option value=\"Cambridge\">Cambridge</option><option value=\"Chatham\">Chatham</option><option value=\"Chatham-Kent\">Chatham-Kent</option><option value=\"Cornwall\">Cornwall</option><option value=\"Elliot Lake\">Elliot Lake</option><option value=\"Etobicoke\">Etobicoke</option><option value=\"Fort Erie\">Fort Erie</option><option value=\"Fort Frances\">Fort Frances</option><option value=\"Gananoque\">Gananoque</option><option value=\"Guelph\">Guelph</option><option value=\"Hamilton\">Hamilton</option><option value=\"Iroquois Falls\">Iroquois Falls</option><option value=\"Kapuskasing\">Kapuskasing</option><option value=\"Kawartha Lakes\">Kawartha Lakes</option><option value=\"Kenora\">Kenora</option><option value=\"Kingston\">Kingston</option><option value=\"Kirkland Lake\">Kirkland Lake</option><option value=\"Kitchener\">Kitchener</option><option value=\"Laurentian Hills\">Laurentian Hills</option><option value=\"London\">London</option><option value=\"Midland\">Midland</option><option value=\"Mississauga\">Mississauga</option><option value=\"Moose Factory\">Moose Factory</option><option value=\"Moosonee\">Moosonee</option><option value=\"Niagara Falls\">Niagara Falls</option><option value=\"Niagara-on-the-Lake\">Niagara-on-the-Lake</option><option value=\"North Bay\">North Bay</option><option value=\"North York\">North York</option><option value=\"Oakville\">Oakville</option><option value=\"Orillia\">Orillia</option><option value=\"Oshawa\">Oshawa</option><option value=\"Ottawa\">Ottawa</option><option value=\"Parry Sound\">Parry Sound</option><option value=\"Perth\">Perth</option><option value=\"Peterborough\">Peterborough</option><option value=\"Picton\">Picton</option><option value=\"Port Colborne\">Port Colborne</option><option value=\"Saint Catharines\">Saint Catharines</option><option value=\"Saint Thomas\">Saint Thomas</option><option value=\"Sarnia-Clearwater\">Sarnia-Clearwater</option><option value=\"Sault Sainte Marie\">Sault Sainte Marie</option><option value=\"Scarborough\">Scarborough</option><option value=\"Simcoe\">Simcoe</option><option value=\"Stratford\">Stratford</option><option value=\"Sudbury\">Sudbury</option><option value=\"Temiskaming Shores\">Temiskaming Shores</option><option value=\"Thorold\">Thorold</option><option value=\"Thunder Bay\">Thunder Bay</option><option value=\"Timmins\">Timmins</option><option value=\"Toronto\">Toronto</option><option value=\"Trenton\">Trenton</option><option value=\"Waterloo\">Waterloo</option><option value=\"Welland\">Welland</option><option value=\"West Nipissing\">West Nipissing</option><option value=\"Windsor\">Windsor</option><option value=\"Woodstock\">Woodstock</option><option value=\"York\">York</option>");
-        } else if (valueSelected == "PE") {
-            $("#city").append("<option value=\"Borden\">Borden</option><option value=\"Cavendish\">Cavendish</option><option value=\"Charlottetown\">Charlottetown</option><option value=\"Souris\">Souris</option><option value=\"Summerside\">Summerside</option>");
-        } else if (valueSelected == "QC") {
-            $("#city").append("<option value=\"Asbestos\">Asbestos</option><option value=\"Baie-Comeau\">Baie-Comeau</option><option value=\"Beloeil\">Beloeil</option><option value=\"Cap-de-la-Madeleine\">Cap-de-la-Madeleine</option><option value=\"Chambly\">Chambly</option><option value=\"Charlesbourg\">Charlesbourg</option><option value=\"Châteauguay\">Châteauguay</option><option value=\"Chibougamau\">Chibougamau</option><option value=\"Côte-Saint-Luc\">Côte-Saint-Luc</option><option value=\"Dorval\">Dorval</option><option value=\"Gaspé\">Gaspé</option><option value=\"Gatineau\">Gatineau</option><option value=\"Granby\">Granby</option><option value=\"Havre-Saint-Pierre\">Havre-Saint-Pierre</option><option value=\"Hull\">Hull</option><option value=\"Jonquière\">Jonquière</option><option value=\"Kuujjuaq\">Kuujjuaq</option><option value=\"La Salle\">La Salle</option><option value=\"La Tuque\">La Tuque</option><option value=\"Lachine\">Lachine</option><option value=\"Laval\">Laval</option><option value=\"Lévis\">Lévis</option><option value=\"Longueuil\">Longueuil</option><option value=\"Magog\">Magog</option><option value=\"Matane\">Matane</option><option value=\"Montreal\">Montreal</option><option value=\"Montréal-Nord\">Montréal-Nord</option><option value=\"Percé\">Percé</option><option value=\"Port-Cartier\">Port-Cartier</option><option value=\"Quebec\">Quebec</option><option value=\"Rimouski\">Rimouski</option><option value=\"Rouyn-Noranda\">Rouyn-Noranda</option><option value=\"Saguenay\">Saguenay</option><option value=\"Saint-Eustache\">Saint-Eustache</option><option value=\"Saint-Hubert\">Saint-Hubert</option><option value=\"Sainte-Anne-de-Beaupré\">Sainte-Anne-de-Beaupré</option><option value=\"Sainte-Foy\">Sainte-Foy</option><option value=\"Sainte-Thérèse\">Sainte-Thérèse</option><option value=\"Sept-Îles\">Sept-Îles</option><option value=\"Sherbrooke\">Sherbrooke</option><option value=\"Sorel-Tracy\">Sorel-Tracy</option><option value=\"Trois-Rivières\">Trois-Rivières</option><option value=\"Val-d’Or\">Val-d’Or</option><option value=\"Waskaganish\">Waskaganish</option>");
-        } else if (valueSelected == "SK") {
-            $("#city").append("<option value=\"Batoche\">Batoche</option><option value=\"Cumberland House\">Cumberland House</option><option value=\"Estevan\">Estevan</option><option value=\"Flin Flon\">Flin Flon</option><option value=\"Moose Jaw\">Moose Jaw</option><option value=\"Prince Albert\">Prince Albert</option><option value=\"Regina\">Regina</option><option value=\"Saskatoon\">Saskatoon</option><option value=\"Uranium City\">Uranium City</option>");
-        } else if (valueSelected == "YT") {
-            $("#city").append("<option value=\"Dawson\">Dawson</option><option value=\"Watson Lake\">Watson Lake</option><option value=\"Whitehorse\">Whitehorse</option>");
-        }
-    }
-</script>
 <div class="container">
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Checkout</h1>
@@ -74,7 +41,21 @@
         </div>
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Billing address</h4>
-            <form asp-controller="Tickets" asp-action="Checkout" method="post" class="mt-3">
+            @using (Html.BeginForm("Checkout", "Tickets", FormMethod.Post, new { onsubmit = "validateForm(event)" }))
+            {
+                @for (var j = 0; j < Model.Ticket.Count; j++)
+                {
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].TicketId)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Type)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Price)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Description)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Availability)
+                    @Html.HiddenFor(modelItem => Model.Ticket[j].Quantity)
+                }
+                Model.Purchase.Amount = price;
+                @Html.HiddenFor(modelItem => Model.Purchase.Uemail)
+                @Html.HiddenFor(modelItem => Model.Purchase.Amount)
+
                 <div class="form-group row g-3">
                     <div class="col-sm-6">
                         <label asp-for="Billing.BFirstName" class="form-label">First name</label>
@@ -98,42 +79,23 @@
                         <input asp-for="Billing.BAddress2" type="text" class="form-control" id="address2" placeholder="Apartment or suite" />
                     </div>
 
+                    <div class="col-12">
+                        <label asp-for="Billing.BCountry" class="form-label">Country</label>
+                        <select asp-for="Billing.BCountry" class="form-select" id="country" OnClick="updateProvince(this.value)">
+                            <option value="Canada">Canada</option>
+                            <option value="United State">United State</option>
+                        </select>
+                    </div>
+
                     <div class="col-md-12">
                         <label asp-for="Billing.BProvince" class="form-label">Province</label>
-                        <select asp-for="Billing.BProvince" class="form-select" id="province" OnClick="updateCity(this.value)">
-                            <option value="AB">Alberta</option>
-                            <option value="BC">British Columbia</option>
-                            <option value="MB">Manitoba</option>
-                            <option value="NL">Newfoundland and Labrador</option>
-                            <option value="NB">New Brunswick</option>
-                            <option value="NT">Northwest Territories</option>
-                            <option value="NS">Nova Scotia</option>
-                            <option value="NU">Nunavut</option>
-                            <option value="ON">Ontario</option>
-                            <option value="PE">Prince Edward Island</option>
-                            <option value="QC">Quebec</option>
-                            <option value="SK">Saskatchewan</option>
-                            <option value="YT">Yukon</option>
-                        </select>
+                        <input asp-for="Billing.BProvince" type="text" class="form-control" id="province" placeholder="" />
                         <span asp-validation-for="Billing.BProvince" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-8">
                         <label asp-for="Billing.BCity" class="form-label">City</label>
-                        <select asp-for="Billing.BCity" class="form-select" id="city">
-                            <option value="Banff">Banff</option>
-                            <option value="Brooks">Brooks</option>
-                            <option value="Calgary">Calgary</option>
-                            <option value="Edmonton">Edmonton</option>
-                            <option value="FortMcMurray">FortMcMurray</option>
-                            <option value="GrandePrairie">GrandePrairie</option>
-                            <option value="Jasper">Jasper</option>
-                            <option value="LakeLouise">LakeLouise</option>
-                            <option value="Lethbridge">Lethbridge</option>
-                            <option value="MedicineHat">MedicineHat</option>
-                            <option value="RedDeer">RedDeer</option>
-                            <option value="SaintAlbert">SaintAlbert</option>
-                        </select>
+                        <input asp-for="Billing.BCity" type="text" class="form-control" id="city" placeholder="" />
                         <span asp-validation-for="Billing.BCity" class="text-danger"></span>
                     </div>
 
@@ -150,12 +112,16 @@
 
                 <div class="my-3">
                     <div class="form-check">
-                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" value="Visa" checked/>
+                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" id="cardtypeVisa" value="Visa" checked />
                         <label asp-for="Payment.CardType" class="form-check-label">Visa Card</label>
                     </div>
                     <div class="form-check">
-                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" value="Master" />
+                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" id="cardtypeMaster" value="Master Card" />
                         <label asp-for="Payment.CardType" class="form-check-label">Master Card</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Payment.CardType" type="radio" class="form-check-input" id="cardtypeAE" value="American Express" />
+                        <label asp-for="Payment.CardType" class="form-check-label">American Express</label>
                     </div>
                 </div>
 
@@ -169,8 +135,9 @@
 
                     <div class="col-md-6">
                         <label asp-for="Payment.CardNumber" class="form-label">Card number</label>
-                        <input asp-for="Payment.CardNumber" type="text" class="form-control" placeholder="" />
+                        <input asp-for="Payment.CardNumber" type="text" class="form-control" name="Payment.CardNumber" placeholder="" />
                         <span asp-validation-for="Payment.CardNumber" class="text-danger"></span>
+
                     </div>
 
                     <div class="col-md-4">
@@ -181,7 +148,7 @@
 
                     <div class="col-md-4">
                         <label class="form-label">Expiration Year</label>
-                        <input asp-for="Payment.ExpiryDateYear" type="text" class="form-control" placeholder="YY" />
+                        <input asp-for="Payment.ExpiryDateYear" type="text" class="form-control" placeholder="YYYY" />
                         <span asp-validation-for="Payment.ExpiryDateYear" class="text-danger"></span>
                     </div>
 
@@ -191,25 +158,11 @@
                         <span asp-validation-for="Payment.CVV" class="text-danger"></span>
                     </div>
                 </div>
-                @{
-                    Model.Purchase.Amount = @price;
-                }
-                @Html.HiddenFor(modelItem => Model.Purchase.Uemail)
-                @Html.HiddenFor(modelItem => Model.Purchase.Amount)
 
-                @for (var j = 0; j < Model.Ticket.Count; j++)
-                {
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].TicketId)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Type)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Price)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Description)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Availability)
-                    @Html.HiddenFor(modelItem => Model.Ticket[j].Quantity)
-                }
                 <hr class="my-4" />
 
                 <button class="w-100 btn btn-outline-secondary" type="submit">Continue to checkout</button>
-            </form>
+            }
         </div>
     </div>
 </div>
