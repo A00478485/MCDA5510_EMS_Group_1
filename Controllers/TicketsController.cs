@@ -79,17 +79,17 @@ namespace EMS_App.Controllers
                     }
                     catch (Exception ex)
                     {
-                        return RedirectToAction("Status");
+                        return View("Status", model);
                     }
                 }
-                return RedirectToAction("Status", new { OrderId = model.Purchase.OrderId});
+                //return RedirectToAction("Status", new { OrderId = model.Purchase.OrderId});
+                return View("Status", model);
             }
             return View(model);
         }
-        public IActionResult Status(int OrderId)
+        public IActionResult Status(CheckoutView checkout)
         {
-            ViewData["OrderId"] = OrderId;
-            return View();
+            return View(checkout);
         }
 
         [AcceptVerbs("GET", "POST")]

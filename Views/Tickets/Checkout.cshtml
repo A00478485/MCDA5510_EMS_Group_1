@@ -52,10 +52,9 @@
                     @Html.HiddenFor(modelItem => Model.Ticket[j].Availability)
                     @Html.HiddenFor(modelItem => Model.Ticket[j].Quantity)
                 }
+                Model.Purchase.Amount = price;
                 @Html.HiddenFor(modelItem => Model.Purchase.Uemail)
                 @Html.HiddenFor(modelItem => Model.Purchase.Amount)
-
-                Model.Purchase.Amount = @price;
 
                 <div class="form-group row g-3">
                     <div class="col-sm-6">
