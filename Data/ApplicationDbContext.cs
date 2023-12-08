@@ -1,4 +1,4 @@
-﻿using EMS_App.Models;
+﻿/*using EMS_App.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,3 +22,4 @@ namespace EMS_App.Data
 
     }
 }
+*/
