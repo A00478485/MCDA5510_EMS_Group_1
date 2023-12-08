@@ -13,6 +13,8 @@ namespace EMS_App.Data
         }
         public DbSet<Speaker> Speaker { get; set; }
         public DbSet<Event> Event { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
 
 
 
