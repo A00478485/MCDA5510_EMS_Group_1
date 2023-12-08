@@ -79,10 +79,10 @@ namespace EMS_App.Controllers
                     }
                     catch (Exception ex)
                     {
-                        //Log, handle or absorbe I don't care ^_^
+                        return RedirectToAction("Status");
                     }
                 }
-                return RedirectToAction("Status", new { OrderId = model.Purchase.OrderId });
+                return RedirectToAction("Status", new { OrderId = model.Purchase.OrderId});
             }
             return View(model);
         }
