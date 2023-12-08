@@ -30,9 +30,6 @@
                         <div>Here are the details of your purchase:</div>
                         <ul>
                             <li>Order ID: @Html.DisplayFor(modelItem => Model.Purchase.OrderId)</li>
-                            <li>Event Name: [Event Name]</li>
-                            <li>Date and Time: [Date and Time]</li>
-                            <li>Venue: [Venue]</li>
                             @for (var j = 0; j < Model.Ticket.Count; j++)
                             {
                                 if (Model.Ticket[j].Quantity == 0)
