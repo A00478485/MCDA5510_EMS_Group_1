@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EMS_App.Data;
 using EMS_App.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualBasic;
+using System.Text.RegularExpressions;
 
 namespace EMS_App.Controllers
 {
@@ -64,25 +67,82 @@ namespace EMS_App.Controllers
                                 ticketpurchase.TicketId = model.Ticket[i].TicketId;
                                 ticketpurchase.Quantity = model.Ticket[i].Quantity;
                                 _context.TicketPurchase.Add(ticketpurchase);
+                                var ava = _context.Ticket.Find(ticketpurchase.TicketId);
+                                if (ava != null) { 
+                                    ava.Availability = ava.Availability - ticketpurchase.Quantity;
+                                    _context.Update(ava);
+                                }
                                 _context.SaveChanges();
                             }
                         }
-
                         dbContextTransaction.Commit();
                     }
                     catch (Exception ex)
                     {
-                        //Log, handle or absorbe I don't care ^_^
+                        return View("Status", model);
                     }
                 }
-                return RedirectToAction("Status", new { OrderId = model.Purchase.OrderId });
+                //return RedirectToAction("Status", new { OrderId = model.Purchase.OrderId});
+                return View("Status", model);
             }
             return View(model);
         }
-        public IActionResult Status(int OrderId)
+        public IActionResult Status(CheckoutView checkout)
         {
-            ViewData["OrderId"] = OrderId;
-            return View();
+            return View(checkout);
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult ValidateCard([Bind(Prefix = "Payment.CardNumber")] long CardNumber, [Bind(Prefix = "Payment.CardName")] String CardName, [Bind(Prefix = "Payment.CardType")] String CardType)
+        {
+            String numberString = CardNumber.ToString();
+
+            if (numberString.Length < 15 || numberString.Length > 16)
+            {
+                return Json($"Invalid Card Length");
+            }
+            if (CardType.Equals("Visa"))
+            {
+                if (!(numberString.StartsWith("4") && numberString.Length == 16))
+                {
+                    return Json($"Invalid Visa Card Number");
+                }
+            }
+            if (CardType.Equals("Master Card"))
+            {
+                int CardNumberPrefix = int.Parse(numberString.Substring(0, 2));
+                if (!((CardNumberPrefix >= 51 && CardNumberPrefix <= 55) && numberString.Length == 16))
+                {
+                    return Json($"Invalid Master Card Number");
+                }
+            }
+            if (CardType.Equals("American Express"))
+            {
+                if (numberString.Length != 15)
+                {
+                    return Json($"Invalid American Express Number");
+                }
+                if (!(numberString.StartsWith("34") || numberString.StartsWith("37")))
+                {
+                    return Json($"Invalid American Express Number");
+                }
+            }
+            return Json(true);
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult ValidatePostalCode([Bind(Prefix = "Billing.BPostalCode")] String PostalCode, [Bind(Prefix = "Billing.BCountry")] String Country)
+        {
+            if (Country.Equals("United State"))
+            {
+                if (!Regex.Match(PostalCode, "^[0-9]{5}(?:-[0-9]{4})?$").Success)
+                    return Json($"Invalid US Postal Code");
+            } else if (Country.Equals("Canada"))
+            {
+                if (!Regex.Match(PostalCode.ToUpper(), "^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] [0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$").Success)
+                    return Json($"Invalid CA Postal Code");
+            }
+            return Json(true);
         }
     }
 }
