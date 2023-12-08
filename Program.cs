@@ -1,5 +1,6 @@
 using EMS_App.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace EMS_App
 {
@@ -13,6 +14,8 @@ namespace EMS_App
             builder.Services.AddControllersWithViews();
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
             var app = builder.Build();
 
@@ -30,6 +33,7 @@ namespace EMS_App
             app.UseRouting();
 
             app.UseAuthorization();
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",

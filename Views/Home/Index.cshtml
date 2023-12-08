@@ -2,13 +2,18 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model Tuple<IEnumerable<Event>, IEnumerable<Speaker>>
+
+
+
+
 <style>
     body {
         background-color: #f8f9fa;
     }
 
     .banner {
-        background-image: url('event-banner.jpg');
+        background-image: url('@Model.Item1.FirstOrDefault()?.EBanner');
         background-size: cover;
         color: white;
         text-align: center;
@@ -35,8 +40,8 @@
 
 
 <div class="banner">
-    <h1 class="display-4 text-dark">AI and Machine Learning</h1>
-    <p class="lead text-success">Join us for an exciting event!</p>
+    <h1 class="display-4 text-dark">@Model.Item1.FirstOrDefault()?.Ename</h1>
+    <p class="lead text-success">@Model.Item1.FirstOrDefault()?.Ediscription</p>
     <a class="btn btn-primary btn-lg" href="#" role="button">Register Now</a>
 </div>
 
@@ -44,17 +49,22 @@
     <h2>Featured Speakers</h2>
 
     <div class="row">
+        @foreach (var speak in Model.Item2)
+           {
         <div class="col-md-4">
             <div class="card speaker-card text-center">
-                <img src="./middle-aged-man-wearing-jacket-laughing-happy.jpg" alt="Speaker 1" class="speaker-image rounded mx-auto d-block">
+                    <img src="@speak.Simage" alt="@speak.Sname" class="speaker-image rounded mx-auto d-block">
                 <div class="card-body">
-                    <h5 class="card-title">Speaker 1</h5>
-                    <p class="card-text">Worked in AI filed for 10 year</p>
+                        <h5 class="card-title">@speak.Sname</h5>
+                        <p class="card-text">@speak.SBio</p>
                 </div>
             </div>
         </div>
 
+           }
 
+
+ 
 
 
     </div>

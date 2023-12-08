@@ -1,6 +1,9 @@
-﻿@model User
-<partial name="_Notification" />
+﻿@page
+@model LoginModel
 
+@{
+    ViewData["Title"] = "Log in";
+}
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
@@ -9,35 +12,41 @@
 
         <div class="col-md-6">
             <div class="row-md-3">
-                <div asp-validation-summary="All"></div>
 
                 <h2 class="text-center p-3">Login here</h2>
             </div>
 
 
             <form method="post" class="p-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="bi bi-envelope-exclamation"></i></span>
                     </div>
-                    <input asp-for="Uemail" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon2" required>
-
-
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" required>
                 </div>
 
 
-
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="bi bi-lock"></i></span>
                     </div>
-                    <input asp-for="Password" type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon5" required>
-
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Sign up</button>
+
+                <button id="login-submit" type="submit" class="btn btn-primary">Log in</button>
                 <a asp-controller="Home" asp-action="Index" class="btn btn-secondary border-1 form-control">New here</a>
             </form>
         </div>
     </div>
 </div>
+
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
