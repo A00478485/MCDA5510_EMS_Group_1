@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EMS_App.Data;
+using EMS_App.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EMS_App.Controllers
 {
     public class EventsController : Controller
     {
-        public IActionResult Index()
+        private readonly EMSContext eMSContext;
+
+        public EventsController(EMSContext eMSContext)
         {
-            return View();
+            this.eMSContext = eMSContext;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var events = await eMSContext.events.ToListAsync<Event>();
+            return View(events);
         }
     }
 }
