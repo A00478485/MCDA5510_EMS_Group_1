@@ -30,8 +30,8 @@
         var qty = 0;
         var param = "";
         $('[id^=qty_]').each(function () {
-            var index = this.TicketId.split('qty_').pop();
-            var el = document.getElementById(this.TicketId);
+            var index = this.id.split('qty_').pop();
+            var el = document.getElementById(this.id);
             qty += parseInt(el.value);
         });
         if (qty == 0) {
