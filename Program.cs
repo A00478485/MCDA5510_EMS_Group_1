@@ -1,6 +1,7 @@
 using EMS_App.Data;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace EMS_App
 {
@@ -20,6 +21,8 @@ namespace EMS_App
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<EMSContext>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -36,6 +39,7 @@ namespace EMS_App
             app.UseRouting();
 
             app.UseAuthorization();
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",

@@ -1,0 +1,43 @@
+﻿@if (TempData["SignUp"] != null)
+{
+
+    <script type="text/javascript">
+
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Operation Successful',
+            text: '@TempData["You Have successfully Sign Up With Us"]',
+        });
+
+    </script>
+}
+
+@if (TempData["delete"] != null)
+{
+
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: 'Operation Successful',
+            text: '@TempData["delete"]',
+        });
+    </script>
+}
+
+@if (TempData["edit"] != null)
+{
+
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: 'Operation Successful',
+            text: '@TempData["edit"]',
+        });
+    </script>
+}
+
+
+
+
+<!-- Include SweetAlert2 JS -->
