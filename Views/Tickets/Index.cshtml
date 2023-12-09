@@ -30,8 +30,8 @@
         var qty = 0;
         var param = "";
         $('[id^=qty_]').each(function () {
-            var index = this.TicketId.split('qty_').pop();
-            var el = document.getElementById(this.TicketId);
+            var index = this.id.split('qty_').pop();
+            var el = document.getElementById(this.id);
             qty += parseInt(el.value);
         });
         if (qty == 0) {
@@ -85,7 +85,7 @@
                     <li>Click the "Buy Now" button.</li>
                     <li>Complete the secure checkout process.</li>
                 </ol>
-                <p>Please note that ticket availability is limited, so act fast to secure your spot at [Event Name]. </p>
+                <p>Please note that ticket availability is limited, so act fast to secure your spot. </p>
                 <p>We look forward to welcoming you to an unforgettable experience!</p>
                 <p>For any inquiries or assistance, feel free to contact our dedicated Customer Support Team.</p>
             </div>
