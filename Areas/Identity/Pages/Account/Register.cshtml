@@ -1,0 +1,86 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="../wwwroot//image/JoinUs.png" class="img-fluid" alt="Join Us Image">
+        </div>
+
+        <div class="col-md-6">
+            <div class="row-md-3">
+                <div asp-validation-summary="All"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+
+                <h2 class="text-center p-3">Sign-up here</h2>
+            </div>
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <span asp-validation-for="Input.Name" class="text-bg-danger"></span>
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    </div>
+                    <input asp-for="Input.Name" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" required>
+                </div>
+                <span asp-validation-for="Input.Number" class="text-bg-danger"></span>
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="bi bi-phone-vibrate"></i></span>
+                    </div>
+                    <input asp-for="Input.Number" type="text" class="form-control" placeholder="Phone Number" aria-label="Phone Number" aria-describedby="basic-addon3" required>
+                </div>
+                <span asp-validation-for="Input.Email" class="text-bg-danger"></span>
+
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                     <span class="input-group-text"><i class="bi bi-envelope-exclamation"></i></span>
+                    </div>
+                    <input asp-for="Input.Email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon2" required>
+                </div>
+                <span asp-validation-for="Input.Password" class="text-bg-danger"></span>
+
+
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    </div>
+                    <input asp-for="Input.Password" class="form-control" placeholder="password" aria-label="password" aria-describedby="basic-addon2" required />
+                </div>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-bg-danger"></span>
+
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    </div>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                </div>
+
+
+                <button id="registerSubmit" type="submit" class="btn btn-primary">Sign up</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary border-1 form-control">Aleardy With Us</a>
+
+
+        </form>
+    </div>
+   
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
