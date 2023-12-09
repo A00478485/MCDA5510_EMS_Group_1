@@ -7,10 +7,16 @@ namespace EMS_App.Data
     {
         public EMSContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<EMSContext>();
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EcommerceDb;Trusted_Connection=True;MultipleActiveResultSets=true");
+            IConfiguration config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var bldr = new DbContextOptionsBuilder<EMSContext>();
+            var con_str = config.GetConnectionString("EMSContext");
+            bldr.UseSqlServer(con_str, b => b.MigrationsAssembly("EMS_App"));
 
-            return new EMSContext(optionsBuilder.Options);
+            return new EMSContext(bldr.Options);
+
         }
     }
 }
