@@ -10,6 +10,7 @@ using EMS_App.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.VisualBasic;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Identity;
 
 namespace EMS_App.Controllers
 {
@@ -22,6 +23,7 @@ namespace EMS_App.Controllers
             _context = context;
         }
 
+        [Authorize]
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
@@ -37,7 +39,7 @@ namespace EMS_App.Controllers
             CheckoutView checkoutView = new CheckoutView();
             checkoutView.Ticket = model.ToList();
             checkoutView.Purchase = new Purchase();
-            checkoutView.Purchase.Uemail = "ac@asd.com";
+            checkoutView.Purchase.Uemail = User.Identity.Name;
             return View("Checkout", checkoutView);
         }
 
