@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace EMS_App.Data
 {
-    public class EMSContext : IdentityDbContext<IdentityUser>
+    public class EMSContext : IdentityDbContext
     {
         public EMSContext()
         {
