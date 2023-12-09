@@ -8,8 +8,8 @@ namespace EMS_App.Controllers
     {
 
 
-        private readonly ApplicationDbContext _db;
-        public SpeakerController(ApplicationDbContext db)
+        private readonly EMSContext _db;
+        public SpeakerController(EMSContext db)
         {
             _db = db;
         }

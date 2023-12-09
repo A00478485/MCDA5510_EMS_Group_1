@@ -8,10 +8,10 @@ namespace EMS_App.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _db;
+        private readonly EMSContext _db;
 
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
+        public HomeController(ILogger<HomeController> logger, EMSContext db)
         {
             _logger = logger;
             _db = db;

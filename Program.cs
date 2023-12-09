@@ -21,7 +21,7 @@ namespace EMS_App
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<EMSContext>();
 
             var app = builder.Build();
 

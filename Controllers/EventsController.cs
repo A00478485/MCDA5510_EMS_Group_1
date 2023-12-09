@@ -7,9 +7,9 @@ namespace EMS_App.Controllers
 {
     public class EventsController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly EMSContext _db;
 
-        public EventsController(ApplicationDbContext db)
+        public EventsController(EMSContext db)
         {
             _db = db;
         }
