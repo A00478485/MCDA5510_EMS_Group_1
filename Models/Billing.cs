@@ -9,11 +9,11 @@ namespace EMS_App.Models
         [Key]
         public int BillingId { get; set; }
         [Required]
-        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ?!.*[;:!@#$%^*+?\\/<>0123456789")]
+        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ;:!@#$%^*+?\\/<>0123456789")]
         [DisplayName("First Name")]
         public required String BFirstName { get; set; }
         [Required]
-        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ?!.*[;:!@#$%^*+?\\/<>0123456789")]
+        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ;:!@#$%^*+?\\/<>0123456789")]
         [DisplayName("Last Name")]
         public required String BLastName { get; set; }
         [Required]
@@ -22,11 +22,11 @@ namespace EMS_App.Models
         public String? BAddress2 { get; set; }
         [Required]
         [DisplayName("City")]
-        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ?!.*[;:!@#$%^*+?\\/<>0123456789")]
+        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ;:!@#$%^*+?\\/<>0123456789")]
         public required String BCity { get; set; }
         [Required]
         [DisplayName("Province")]
-        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ?!.*[;:!@#$%^*+?\\/<>0123456789")]
+        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ;:!@#$%^*+?\\/<>0123456789")]
         public required String BProvince { get; set; }
         [Required]
         [DisplayName("Postal Code")]

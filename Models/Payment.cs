@@ -11,7 +11,7 @@ namespace EMS_App.Models
         public int PaymentId { get; set; }
         [Required]
         [DisplayName("Name On Card")]
-        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ?!.*;:!@#$%^*+?\\/<>0123456789")]
+        [RegularExpression("^(?!.*[;:!@#$%^*+?\\\\\\/<>0-9]).*$", ErrorMessage = "Invalid Character: ;:!@#$%^*+?\\/<>0123456789")]
         public string CardName {  get; set; }
         [Required]
         [DisplayName("Card Number")]
