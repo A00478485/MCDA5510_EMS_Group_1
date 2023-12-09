@@ -5,11 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using EMS_App.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace EMS_App.Data
 {
-    public class EMSContext : IdentityDbContext
+    public class EMSContext : IdentityDbContext<IdentityUser>
     {
+        public EMSContext()
+        {
+
+        }
         public EMSContext (DbContextOptions<EMSContext> options)
             : base(options)
         {
